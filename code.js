@@ -34,77 +34,75 @@ window.preload = function () {
     }
 // -----
 
-var life = 0;
-var car1, car2, car3,car4;
-var boundary1, boundary2;
-var sam;
+var ball1 = createSprite(50,50,50,50);
+ball1.shapeColor = "pink";
+var ball2 = createSprite(395,395,10,10);
+ball2.shapeColor = "Green";
+var ball3 = createSprite(200, 200,30,30);
+ball3.shapeColor = "orange";
+var ball4 = createSprite(200, 100,40,40);
+var ball5 = createSprite(100,200,55,55);
+ball4.shapeColor = "blue";
+ball5.shapeColor = "red";
+var ball6 = createSprite(200, 300,35,35);
+ball1.rotationSpeed=50;
+ball2.rotationSpeed=50;
+ball3.rotationSpeed=50;
+ball4.rotationSpeed=50;
+ball5.rotationSpeed=50;
+ball6.rotationSpeed=50;
+ball1.displace(ball2);
 
-  boundary1 = createSprite(190,120,420,3);
-  boundary2 = createSprite(190,260,420,3);
-  
-  sam = createSprite(20,190,13,13);
-  sam.shapeColor = "green";
-  
-  car1 = createSprite(100,130,10,10);
-  car1.shapeColor = "red";
-  car2 = createSprite(215,130,10,10);
-  car2.shapeColor = "red";
-  car3 = createSprite(165,250,10,10);
-  car3.shapeColor = "red";
-  car4 = createSprite(270,250,10,10);
-  car4.shapeColor = "red";
-  
-  
-  car1.velocityY = 8;
-  car2.velocityY = 8;
-  car3.velocityY = -8;
-  car4.velocityY = -8;
- 
+ball1.velocityX = 12;
+ball1.velocityY = 2;
+ball2.velocityX = -20;
+ball2.velocityY = -5;
+ball3.velocityX = 8;
+ball3.velocityY = 6;
+ball4.velocityX = -6;
+ball4.velocityY = -10;
+ball5.velocityX = -7;
+ball5.velocityY = 9;
+ball6.velocityX = 7;
+ball6.velocityY = -13;
+
 
 function draw() {
+  
   background("white");
-  text("Lives: " + life,200,100);
-  strokeWeight(0);
-  fill("lightblue");
-  rect(0,120,52,140);
-  fill("yellow");
-  rect(345,120,52,140);
   
-  car1.bounceOff(boundary1);
-  car1.bounceOff(boundary2);
-  car2.bounceOff(boundary1);
-  car2.bounceOff(boundary2);
-  car3.bounceOff(boundary1);
-  car3.bounceOff(boundary2);
-  car4.bounceOff(boundary1);
-  car4.bounceOff(boundary2);
+  createEdgeSprites();
   
- 
-  if(keyDown("right")){
-    sam.x = sam.x + 2;
-  }
-  if(keyDown("left")){
-    sam.x = sam.x - 2;
-  }
+ball1.bounceOff(edges);
+ball2.bounceOff(edges);
+ball3.bounceOff(edges);
+ball4.bounceOff(edges);
+ball5.bounceOff(edges);
+ball6.bounceOff(edges);
+        
   
-  if(
-     sam.isTouching(car1)||
-     sam.isTouching(car2)||
-     sam.isTouching(car3)||
-     sam.isTouching(car4))
-  {
-     sam.x = 20;
-     sam.y = 190;
-     life = life + 1;
-  }
-  
- drawSprites();
+ball1.bounce(ball2);
+ball1.bounce(ball3);
+ball1.bounce(ball4);
+ball1.bounce(ball5);
+ball1.bounce(ball6);
+
+ball2.bounce(ball3);
+ball2.bounce(ball4);
+ball2.bounce(ball5);
+ball2.bounce(ball6);
+
+ball3.bounce(ball4);
+ball3.bounce(ball5);
+ball3.bounce(ball6);
+
+ball4.bounce(ball5);
+ball4.bounce(ball6);
+
+ball5.bounce(ball6);
+
+  drawSprites();
 }
-
-
-
-
-
 
 // -----
     try { window.draw = draw; } catch (e) {}
